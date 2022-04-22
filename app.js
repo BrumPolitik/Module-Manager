@@ -42,7 +42,7 @@ app.use('/api/goals', goals);
 app.use('/api/objectives', objectives);
 app.use('/api/programmes', programmes);
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../module-manager/src/components/Login', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '/module-manager/src/components/Login', 'index.html'));
 });
 
 const port = process.env.PORT || 8082;

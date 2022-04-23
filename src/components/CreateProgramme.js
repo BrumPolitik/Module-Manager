@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -25,7 +26,7 @@ class CreateProgramme extends Component {
     onSubmit = async e => {
         e.preventDefault();
 
-        let user = await axios.get('http://localhost:8082/api/users/' + cookies.get("TOKEN"))
+        let user = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"))
 
         const data = {
             title: this.state.title,
@@ -36,7 +37,7 @@ class CreateProgramme extends Component {
         };
 
         axios
-            .post('http://localhost:8082/api/programmes', data)
+            .post(backendPath + '/api/programmes', data)
             .then(res => {
                 this.setState({
                     title: '',

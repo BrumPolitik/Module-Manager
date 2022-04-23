@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import { Link } from 'react-router-dom';
 import ProgrammeCard from './ProgrammeCard';
 
@@ -14,7 +15,7 @@ class ShowProgrammes extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8082/api/programmes')
+            .get(backendPath + '/api/programmes')
             .then(res => {
                 this.setState({
                     programmes: res.data

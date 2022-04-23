@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 import {removeCookie} from "../removeCookie";
 const cookies = new Cookies();
@@ -16,7 +17,7 @@ class showModuleDetails extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:8082/api/modules/'+ this.props.match.params.id)
+      .get(backendPath + '/api/modules/'+ this.props.match.params.id)
       .then(res => {
         this.setState({
           module: res.data[0]
@@ -30,7 +31,7 @@ class showModuleDetails extends Component {
 
   onDeleteClick (id) {
     axios
-      .delete('http://localhost:8082/api/modules/'+id)
+      .delete(backendPath + '/api/modules/'+id)
       .then(res => {
         this.props.history.push("/show-module-list");
       })

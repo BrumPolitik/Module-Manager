@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import { Link } from 'react-router-dom';
 import ModuleCard from './ModuleCard';
 import Cookies from "universal-cookie";
@@ -18,11 +19,11 @@ class ShowModuleList extends Component {
 
 
   async componentDidMount() {
-    let userid = await axios.get('http://localhost:8082/api/users/' + cookies.get("TOKEN"));
+    let userid = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"));
     if (userid.data[0].user_type === "prog") {
-      let progid = await axios.get('http://localhost:8082/api/programmes/' + cookies.get("PROG"));
+      let progid = await axios.get(backendPath + '/api/programmes/' + cookies.get("PROG"));
       axios
-          .get('http://localhost:8082/api/modules/' + progid.data[0].programme_id)
+          .get(backendPath + '/api/modules/' + progid.data[0].programme_id)
           .then(res => {
             this.setState({
               modules: res.data
@@ -34,7 +35,7 @@ class ShowModuleList extends Component {
       this.state.prog = true;
     } else {
       axios
-          .get('http://localhost:8082/api/modules/' + userid.data[0].user_id)
+          .get(backendPath + '/api/modules/' + userid.data[0].user_id)
           .then(res => {
             this.setState({
               modules: res.data

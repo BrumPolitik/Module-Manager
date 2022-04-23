@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -25,7 +26,7 @@ class CreateObjective extends Component {
 
         let collectionLength = 0;
         await axios
-            .get('http://localhost:8082/api/objectives')
+            .get(backendPath + '/api/objectives')
             .then(res => {
                 collectionLength = res.data.length;
             })
@@ -38,7 +39,7 @@ class CreateObjective extends Component {
         };
 
         axios
-            .post('http://localhost:8082/api/objectives', data)
+            .post(backendPath + '/api/objectives', data)
             .then(res => {
                 this.setState({
                     obj_id: '',

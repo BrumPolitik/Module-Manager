@@ -1,0 +1,1 @@
+export const backendPath = "https://warm-river-64091.herokuapp.com"

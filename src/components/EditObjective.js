@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -18,7 +19,7 @@ class EditObjective extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8082/api/objectives/'+this.props.match.params.id)
+            .get(backendPath + '/api/objectives/'+this.props.match.params.id)
             .then(res => {
                 this.setState({
                     obj_id: res.data[0].obj_id,
@@ -47,7 +48,7 @@ class EditObjective extends Component {
         };
 
         axios
-            .put('http://localhost:8082/api/objectives', data)
+            .put(backendPath + '/api/objectives', data)
             .then(res => {
                 this.props.history.push(`/show-objectives/${cookies.get("MODULE") + ':' + cookies.get("GOAL")}`);
             })

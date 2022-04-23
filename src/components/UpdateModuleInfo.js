@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {backendPath} from "../path";
 import '../App.css';
 
 class UpdateModuleInfo extends Component {
@@ -18,7 +19,7 @@ class UpdateModuleInfo extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:8082/api/modules/'+this.props.match.params.id)
+      .get(backendPath + '/api/modules/'+this.props.match.params.id)
       .then(res => {
         this.setState({
           title: res.data[0].title,
@@ -51,7 +52,7 @@ class UpdateModuleInfo extends Component {
     };
 
     axios
-      .put('http://localhost:8082/api/modules/'+this.props.match.params.id, data)
+      .put(backendPath + '/api/modules/'+this.props.match.params.id, data)
       .then(res => {
         this.props.history.push('/show-module/'+this.props.match.params.id);
       })

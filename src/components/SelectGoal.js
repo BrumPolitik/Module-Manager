@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import Goal2Card from "./Goal2Card";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -16,7 +17,7 @@ class SelectGoal extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8082/api/goals')
+            .get(backendPath + '/api/goals')
             .then(res => {
                 this.setState({
                     goals: res.data

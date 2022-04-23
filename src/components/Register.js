@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 
 class Register extends Component {
   constructor() {
@@ -27,7 +28,7 @@ class Register extends Component {
     };
 
     axios
-      .post('http://localhost:8082/api/users', data)
+      .post(backendPath + '/api/users', data)
       .then(res => {
         console.log("Here");
         this.setState({

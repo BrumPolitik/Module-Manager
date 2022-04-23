@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -28,7 +29,7 @@ class Login extends Component {
     var password_id = this.state.password;
     var basicAuth = 'Basic ' + btoa(user_id + ':' + password_id);
 
-    axios.get('http://localhost:8082/api/users/'+user_id,  {
+    axios.get(backendPath + '/api/users/'+user_id,  {
         headers: {
           withCredentials: true,
           authorization: basicAuth
@@ -36,7 +37,7 @@ class Login extends Component {
     }).then(function(response) {
       console.log('Authenticated');
       axios
-          .get('http://localhost:8082/api/users/'+user_id)
+          .get(backendPath + '/api/users/'+user_id)
           .then(res => {
             try {
               cookies.remove("TOKEN", { path: '/' });

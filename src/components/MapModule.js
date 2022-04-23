@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 import GoalCard from "./GoalCard";
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -15,10 +16,10 @@ class MapModule extends Component {
     }
 
     async componentDidMount() {
-        let progId = await axios.get('http://localhost:8082/api/modules/' + cookies.get("MODULE"));
+        let progId = await axios.get(backendPath + '/api/modules/' + cookies.get("MODULE"));
 
         axios
-            .get('http://localhost:8082/api/goals/' + progId.data[0].programme_id)
+            .get(backendPath + '/api/goals/' + progId.data[0].programme_id)
             .then(res => {
                 this.setState({
                     goals: res.data

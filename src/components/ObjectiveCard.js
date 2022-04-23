@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import axios from "axios";
+import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -10,7 +11,7 @@ const ObjectiveCard = (props) => {
 
     function onDeleteClick (id) {
         axios
-            .delete('http://localhost:8082/api/objectives/'+objective._id)
+            .delete(backendPath + '/api/objectives/'+objective._id)
             .then(res => {
                 window.location.reload();
             })

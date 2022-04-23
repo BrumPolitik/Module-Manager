@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {backendPath} from "../path";
 import ObjectiveCard from "./ObjectiveCard";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -16,7 +17,7 @@ class ShowObjectives extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8082/api/objectives/' + cookies.get("MODULE")+':' + cookies.get("GOAL"))
+            .get(backendPath + '/api/objectives/' + cookies.get("MODULE")+':' + cookies.get("GOAL"))
             .then(res => {
                 this.setState({
                     objectives: res.data

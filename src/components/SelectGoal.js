@@ -15,15 +15,17 @@ class SelectGoal extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let progId = await axios.get(backendPath + '/api/modules/' + cookies.get("MODULE"));
+
         axios
-            .get(backendPath + '/api/goals')
+            .get(backendPath + '/api/goals' +  + progId.data[0].programme_id)
             .then(res => {
                 this.setState({
                     goals: res.data
                 })
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log('Error from SelectGoal');
             })
     };

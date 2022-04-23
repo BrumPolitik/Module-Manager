@@ -50,9 +50,9 @@ class Login extends Component {
             })
 
             if (res.data[0].user_type === "prog") {
-              window.location.href="/show-programmes/"+res.data._id;
+              window.location.href="/show-programmes";
             } else {
-              window.location.href="/show-module-list/"+ res.data._id;
+              window.location.href="/show-module-list";
             }
           })
           .catch(err => {

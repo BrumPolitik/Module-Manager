@@ -1,6 +1,6 @@
 {
   "name": "module-manager",
-  "homepage": ".",
+  "homepage": "https://the-awesome-brumpolitik-site.netlify.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

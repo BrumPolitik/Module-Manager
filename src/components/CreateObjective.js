@@ -69,14 +69,14 @@ class CreateObjective extends Component {
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center">Add Objective</h1>
                             <p className="lead text-center">
-                                Edit existing objective
+                                Add new objective
                             </p>
 
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div className='form-group'>
                                     <input
                                         type='text'
-                                        placeholder='Objective'
+                                        placeholder='Objective Description'
                                         name='obj_name'
                                         className='form-control'
                                         value={this.state.obj_name}

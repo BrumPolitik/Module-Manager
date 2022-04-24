@@ -33,7 +33,7 @@ class CreateProgramme extends Component {
             programme_id: this.state.programme_id,
             programme_leader: user.data[0].user_id,
             description: this.state.description,
-            published_date: this.state.published_date
+            published_date: new Date()
         };
 
         axios
@@ -102,17 +102,6 @@ class CreateProgramme extends Component {
                                         name='description'
                                         className='form-control'
                                         value={this.state.description}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-
-                                <div className='form-group'>
-                                    <input
-                                        type='date'
-                                        placeholder='published date'
-                                        name='published_date'
-                                        className='form-control'
-                                        value={this.state.published_date}
                                         onChange={this.onChange}
                                     />
                                 </div>

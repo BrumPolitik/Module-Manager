@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import {removeCookie} from "../removeCookie";
 import Cookies from "universal-cookie";
-const cookies = new Cookies();
 import Goal2Card from "./Goal2Card";
+const cookies = new Cookies();
+
 
 
 

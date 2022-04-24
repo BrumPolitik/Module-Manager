@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import Cookies from "universal-cookie";
-const cookies = new Cookies();
 import {backendPath} from "../path";
+import axios from "axios";
+const cookies = new Cookies();
+
 
 const Goal2Card = (props) => {
     const  goal  = props.goal;

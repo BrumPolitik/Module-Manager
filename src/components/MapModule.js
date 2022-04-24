@@ -20,20 +20,25 @@ class MapModule extends Component {
 
         axios
             .get(backendPath + '/api/goals/' + progId.data[0].programme_id)
-            .then(res => {
+            .then(async res => {
                 this.setState({
                     goals: res.data
+                })
+                let response = await axios.get(backendPath + '/api/objectives/' + cookies.get("MODULE"))
+                this.setState({
+                    objectivesArray: response.data
                 })
             })
             .catch(err => {
                 console.log('Error from MapModule');
-            })
+            });
     };
 
 
     render() {
         const modId = cookies.get("MODULE")
         const goals = this.state.goals;
+        const objectives = this.state.objectivesArray;
         console.log("PrintGoal: " + goals);
         let goalList;
 
@@ -41,7 +46,7 @@ class MapModule extends Component {
             goalList = "there is no goal record!";
         } else {
             goalList = goals.map((goal, k) =>
-                <GoalCard goal={goal} key={k} />
+                <GoalCard goal={goal} objectives={objectives} key={k}/>
             );
         }
 
@@ -55,9 +60,6 @@ class MapModule extends Component {
                         </div>
 
                         <div className="col-md-11">
-                            <Link to={`/select-goal/${modId}`} className="btn btn-outline-warning float-left">
-                                + Add New Objective
-                            </Link>
                             <Link to={`/show-module/${modId}`} className="btn btn-outline-warning float-right">
                                 Show Module Details
                             </Link>

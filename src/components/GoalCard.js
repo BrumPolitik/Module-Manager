@@ -2,30 +2,67 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import Cookies from "universal-cookie";
+import ObjectiveCard from "./ObjectiveCard";
 const cookies = new Cookies();
 
 const GoalCard = (props) => {
-    const  goal  = props.goal;
+    const goal = props.goal;
+    let objectives = props.objectives;
+    let displayObjectives = [];
+    try {
+        for (const element of objectives) {
+            if (element.goal_id === goal._id) {
+                displayObjectives.push(element);
+            }
+        }
 
-    function onGoalClick () {
+    } catch (err) {
+
+    }
+
+    let objList;
+    if(!displayObjectives) {
+        objList = "there is no goal record!";
+    } else {
+        objList = displayObjectives.map((objective, k) =>
+            <ObjectiveCard objective={objective} key={k}/>
+        );
+    }
+
+
+    function onGoalClick() {
         try {
-            cookies.remove("GOAL", { path: '/' });
+            cookies.remove("GOAL", {path: '/'});
         } catch (err) {
 
         }
         cookies.set("GOAL", goal._id, {path: "/"})
     }
 
-    return(
+    function onCreateClick () {
+        try {
+            cookies.remove("GOAL", { path: '/' });
+        } catch (err) {
+
+        }
+        cookies.set("GOAL", goal._id, {path: "/"})
+        window.location.href=`/create-objective/${goal._id}`
+    }
+
+
+    return (
         <div className="goalcard-container">
             <div className="desc">
                 <h2>
                     <Link to={`/show-objectives/${goal._id}`} onClick={onGoalClick.bind(goal._id)}>
-                        { goal.goal_name }
+                        {goal.goal_name}
                     </Link>
                 </h2>
-                <h3>{goal.goal_id}</h3>
                 <p>{goal.programme_id}</p>
+                <div>
+                    {objList}
+                </div>
+                <button className="btn margin-top" onClick={onCreateClick.bind(goal._id)}><i className="fa fa-plus"></i></button>
             </div>
         </div>
     )

@@ -3,29 +3,37 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
+import {backendPath} from "../path";
 
 const Goal2Card = (props) => {
     const  goal  = props.goal;
 
-    function onGoalClick () {
-        try {
-            cookies.remove("GOAL", { path: '/' });
-        } catch (err) {
+    function onDeleteClick (id) {
+        axios
+            .delete(backendPath + '/api/goals/' + goal._id)
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log("Error form ShowModuleDetails_deleteClick");
+            })
+    };
 
-        }
-        cookies.set("GOAL", goal._id, {path: "/"})
+    function onEditClick (id) {
+        window.location.href=`/edit-goal/${goal._id}`;
     }
 
     return(
-        <div className="goalcard-container">
-            <div className="desc">
-                <h2>
-                    <Link to={`/create-objective/${goal._id}`} onClick={onGoalClick.bind(goal._id)}>
-                        { goal.goal_name }
-                    </Link>
-                </h2>
-                <h3>{goal.goal_id}</h3>
-                <p>{goal.programme_id}</p>
+        <div className="float-left">
+            <div className="obj-container">
+                <h2>{goal.goal_name}</h2>
+                <div>
+                    <div className="padded">
+                        <button className="btn margin-right" onClick={onEditClick.bind(goal._id)}><i className="fa fa-pencil-alt"></i></button>
+
+                        <button className="btn red" onClick={onDeleteClick.bind(goal._id)}><i className="fa fa-trash"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     )

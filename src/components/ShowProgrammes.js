@@ -16,9 +16,13 @@ class ShowProgrammes extends Component {
     componentDidMount() {
         axios
             .get(backendPath + '/api/programmes')
-            .then(res => {
+            .then(async res => {
                 this.setState({
                     programmes: res.data
+                })
+                let response = await axios.get(backendPath + '/api/goals')
+                this.setState({
+                    goalsArray: response.data
                 })
             })
             .catch(err =>{
@@ -29,14 +33,14 @@ class ShowProgrammes extends Component {
 
     render() {
         const programmes = this.state.programmes;
-        console.log("PrintModule: " + programmes);
-        let programmeList;
+        const goals = this.state.goalsArray;
 
+        let programmeList;
         if(!programmes) {
             programmeList = "there is no module record!";
         } else {
             programmeList = programmes.map((programme, k) =>
-                <ProgrammeCard programme={programme} key={k} />
+                <ProgrammeCard programme={programme} goals={goals} key={k} />
             );
         }
 

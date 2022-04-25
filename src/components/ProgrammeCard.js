@@ -54,7 +54,7 @@ const ProgrammeCard = (props) => {
                 <div>
                     {goalList}
                 </div>
-                <button className="btn margin-top" onClick={onCreateClick.bind(goal._id)}><i className="fa fa-plus"></i></button>
+                <button className="btn margin-top" onClick={onCreateClick.bind(programme._id)}><i className="fa fa-plus"></i></button>
             </div>
         </div>
     )

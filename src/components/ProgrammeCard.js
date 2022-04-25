@@ -47,7 +47,7 @@ const ProgrammeCard = (props) => {
         <div className="card-container">
             <div className="desc">
                 <h2>
-                    <Link to={`/show-module-list`} onClick={onProgClick.bind()}>
+                    <Link to={`/show-programme/` + programme._id} onClick={onProgClick.bind()}>
                         { programme.title }
                     </Link>
                 </h2>

@@ -17,6 +17,7 @@ import CreateProgramme from './components/CreateProgramme';
 import EditObjective from './components/EditObjective';
 import EditGoal from "./components/EditGoal";
 import CreateGoal from "./components/CreateGoal";
+import ShowProgrammeDetails from "./components/ShowProgrammeDetails";
 
 class App extends Component {
   render() {
@@ -38,6 +39,7 @@ class App extends Component {
           <Route path='/edit-objective' component={EditObjective} />
           <Route path='/edit-goal' component={EditGoal} />
           <Route path='/create-goal/:id' component={CreateGoal} />
+          <Route path='/show-programme/:id' component={ShowProgrammeDetails} />
         </div>
       </Router>
     );

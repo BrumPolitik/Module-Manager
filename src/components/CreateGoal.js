@@ -6,7 +6,7 @@ import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-class CreateObjective extends Component {
+class CreateGoal extends Component {
     constructor() {
         super();
         this.state = {
@@ -26,36 +26,36 @@ class CreateObjective extends Component {
 
         let collectionLength = 0;
         await axios
-            .get(backendPath + '/api/objectives')
+            .get(backendPath + '/api/goals')
             .then(res => {
                 collectionLength = res.data.length;
             })
 
+        let obj = window.location.pathname.split('/')[2];
         const data = {
-            obj_id: collectionLength,
-            obj_name: this.state.obj_name,
-            module_ids: cookies.get("MODULE"),
-            goal_id: cookies.get("GOAL")
+            goal_id: collectionLength,
+            goal_name: this.state.goal_name,
+            programme_id: obj
         };
 
         axios
-            .post(backendPath + '/api/objectives', data)
+            .post(backendPath + '/api/goals', data)
             .then(res => {
                 this.setState({
-                    obj_id: '',
-                    obj_name: '',
-                    module_ids: '',
-                    goal_id: ''
+                    goal_id: '',
+                    goal_name: '',
+                    programme_id: ''
                 })
-                this.props.history.push(`/map-module/${cookies.get("MODULE")}`);
+                this.props.history.push(`/show-programmes/${cookies.get("TOKEN")}`);
             })
             .catch(err => {
-                console.log("Error in CreateObjective!");
+                console.log("Error in CreateGoal!");
             })
     };
 
     render() {
-        const idMap = `/map-module/${cookies.get("MODULE")}`
+        const idMap = `/show-programme/${cookies.get("PROG")}`;
+
         return (
             <div className="CreateModule">
                 <div className="container">
@@ -63,23 +63,23 @@ class CreateObjective extends Component {
                         <div className="col-md-8 m-auto">
                             <br />
                             <Link to={idMap} className="btn btn-outline-warning float-left">
-                                Objectives
+                                Programmes
                             </Link>
                         </div>
                         <div className="col-md-8 m-auto">
-                            <h1 className="display-4 text-center">Add Objective</h1>
+                            <h1 className="display-4 text-center">Add Goal</h1>
                             <p className="lead text-center">
-                                Add new objective
+                                Add new goal
                             </p>
 
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div className='form-group'>
                                     <input
                                         type='text'
-                                        placeholder='Objective Description'
-                                        name='obj_name'
+                                        placeholder='Goal Description'
+                                        name='goal_name'
                                         className='form-control'
-                                        value={this.state.obj_name}
+                                        value={this.state.goal_name}
                                         onChange={this.onChange}
                                     />
                                 </div>
@@ -98,4 +98,4 @@ class CreateObjective extends Component {
     }
 }
 
-export default CreateObjective;
+export default CreateGoal;

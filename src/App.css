@@ -83,6 +83,11 @@
   background-color: #B51D1D;
 }
 
+.auto-resize {
+  resize: vertical;
+  overflow: auto;
+}
+
 .margin-right {
   margin-right: 5px;
 }

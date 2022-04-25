@@ -73,11 +73,12 @@ class CreateGoal extends Component {
 
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div className='form-group'>
-                                    <input
+                                    <textarea
                                         type='text'
                                         placeholder='Goal Description'
                                         name='goal_name'
                                         className='form-control'
+                                        rows = {3}
                                         value={this.state.goal_name}
                                         onChange={this.onChange}
                                     />

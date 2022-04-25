@@ -15,27 +15,26 @@ const ModuleCard = (props) => {
 
     function renderProg() {
         if (props.prog === true) {
-            return (
-                <input type="checkbox" id={"confirmCheck"} />
-            )
+            if (!module.confirmed) {
+                return (
+                    <button className="btn margin-top" onClick={confirmation.bind()}>Accept</button>
+                )
+            }
         }
     }
-    window.onload = function () {
-        let confirmbox = document.getElementById("confirmCheck")
-        confirmbox.addEventListener('change', (event) => {
-            if (event.currentTarget.checked) {
-                const data = {
-                    confirmed: true
-                }
-                axios.put(backendPath + '/api/modules/' + module._id, data)
-            } else {
-                const data = {
-                    confirmed: false
-                }
-                axios.put(backendPath + '/api/modules/' + module._id, data)
-            }
-        })
-    }
+    function confirmation() {
+        const data = {
+            confirmed: true
+        }
+        axios
+            .put(backendPath + '/api/modules/' + module._id, data)
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log("Error form ModuleCard_confirmation");
+            })
+    };
 
     return(
         <div className="card-container">

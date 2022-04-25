@@ -96,11 +96,12 @@ class CreateProgramme extends Component {
                                 </div>
 
                                 <div className='form-group'>
-                                    <input
+                                    <textarea
                                         type='text'
                                         placeholder='Describe the programme'
                                         name='description'
                                         className='form-control'
+                                        rows = {3}
                                         value={this.state.description}
                                         onChange={this.onChange}
                                     />

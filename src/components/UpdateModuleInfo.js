@@ -135,11 +135,12 @@ class UpdateModuleInfo extends Component {
 
             <div className='form-group'>
             <label htmlFor="description">Description</label>
-              <input
+              <textarea
                 type='text'
                 placeholder='Describe the module'
                 name='description'
                 className='form-control'
+                rows = {3}
                 value={this.state.description}
                 onChange={this.onChange}
               />

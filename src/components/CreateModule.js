@@ -30,7 +30,6 @@ class CreateModule extends Component {
   }
 
   onChange = e => {
-    console.log(e.target);
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -125,11 +124,12 @@ class CreateModule extends Component {
                   </div>
 
                   <div className='form-group'>
-                    <input
+                    <textarea
                         type='text'
                         placeholder='Describe the module'
                         name='description'
                         className='form-control'
+                        rows = {3}
                         value={this.state.description}
                         onChange={this.onChange}
                     />

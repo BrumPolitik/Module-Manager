@@ -6,31 +6,29 @@ import {backendPath} from "../path";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-class EditObjective extends Component {
+class EditGoal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            obj_id: '',
-            obj_name:'',
-            module_ids:'',
-            goal_id:''
+            goal_id: '',
+            goal_name:'',
+            programme_id:'',
         };
     }
 
     componentDidMount() {
         let obj = window.location.pathname.split('/')[2];
         axios
-            .get(backendPath + '/api/objectives/' + obj)
+            .get(backendPath + '/api/goals/' + obj)
             .then(res => {
                 this.setState({
-                    obj_id: res.data[0].obj_id,
-                    obj_name: res.data[0].obj_name,
-                    module_ids: res.data[0].module_ids,
-                    goal_id: res.data[0].goal_id
+                    goal_id: res.data[0].goal_id,
+                    goal_name: res.data[0].goal_name,
+                    programme_id: res.data[0].programme_id
                 })
             })
             .catch(err => {
-                console.log("Error from EditObjective");
+                console.log("Error from EditGoal");
             })
     };
 
@@ -42,26 +40,25 @@ class EditObjective extends Component {
         e.preventDefault();
 
         const data = {
-            obj_id: this.state.obj_id,
-            obj_name: this.state.obj_name,
-            module_ids: this.state.module_ids,
-            goal_id: this.state.goal_id
+            goal_id: this.state.goal_id,
+            goal_name: this.state.goal_name,
+            programme_id: this.state.programme_id
         };
 
         let obj = window.location.pathname.split('/')[2];
 
         axios
-            .put(backendPath + '/api/objectives/' + obj, data)
+            .put(backendPath + '/api/goals/' + obj, data)
             .then(res => {
-                this.props.history.push(`/map-module/${cookies.get("MODULE")}`);
+                this.props.history.push(`/show-programmes/${cookies.get("TOKEN")}`);
             })
             .catch(err => {
-                console.log("Error in EditObjective!");
+                console.log("Error in EditGoal!");
             })
     };
 
     render() {
-        const idMap = `/map-module/${cookies.get("MODULE")}`
+        const idMap = `/show-programmes/${cookies.get("TOKEN")}`
         return (
             <div className="CreateModule">
                 <div className="container">
@@ -69,23 +66,23 @@ class EditObjective extends Component {
                         <div className="col-md-8 m-auto">
                             <br />
                             <Link to={idMap} className="btn btn-outline-warning float-left">
-                                Module Mapping
+                                Programmes
                             </Link>
                         </div>
                         <div className="col-md-8 m-auto">
-                            <h1 className="display-4 text-center">Edit Objective</h1>
+                            <h1 className="display-4 text-center">Edit Goal</h1>
                             <p className="lead text-center">
-                                Edit existing objective
+                                Edit existing goal
                             </p>
 
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div className='form-group'>
                                     <input
                                         type='text'
-                                        placeholder='Objective'
-                                        name='obj_name'
+                                        placeholder='Goal'
+                                        name='goal_name'
                                         className='form-control'
-                                        value={this.state.obj_name}
+                                        value={this.state.goal_name}
                                         onChange={this.onChange}
                                     />
                                 </div>
@@ -104,4 +101,4 @@ class EditObjective extends Component {
     }
 }
 
-export default EditObjective;
+export default EditGoal;

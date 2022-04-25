@@ -37,6 +37,10 @@ const ProgrammeCard = (props) => {
         cookies.set("PROG", programme._id, {path: "/"})
     }
 
+    function onCreateClick () {
+        window.location.href=`/create-goal/${programme._id}`
+    }
+
     return(
         <div className="card-container">
             <div className="desc">
@@ -47,7 +51,10 @@ const ProgrammeCard = (props) => {
                 </h2>
                 <h3>{programme.programme_leader}</h3>
                 <p>{programme.description}</p>
-                {goalList}
+                <div>
+                    {goalList}
+                </div>
+                <button className="btn margin-top" onClick={onCreateClick.bind(goal._id)}><i className="fa fa-plus"></i></button>
             </div>
         </div>
     )

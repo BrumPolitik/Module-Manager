@@ -88,7 +88,7 @@ class UpdateModuleInfo extends Component {
               <label htmlFor="title">Title</label>
               <input
                 type='text'
-                placeholder='Title of the Book'
+                placeholder='Title of the Module'
                 name='title'
                 className='form-control'
                 value={this.state.title}

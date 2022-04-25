@@ -67,7 +67,7 @@ class ShowModuleList extends Component {
       moduleList = "there is no module record!";
     } else {
       moduleList = modules.map((module, k) =>
-        <ModuleCard module={module} key={k} />
+        <ModuleCard module={module} prog={this.state.prog} key={k} />
       );
     }
 

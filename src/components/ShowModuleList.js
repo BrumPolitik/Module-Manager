@@ -47,19 +47,18 @@ class ShowModuleList extends Component {
     }
   };
 
-  renderProg() {
-    if (this.state.prog === true) {
-      return (
-          <Link to="/show-programmes" className="btn btn-outline-warning float-right">
-            View Programmes
-          </Link>
-      )
+  checkProg(prog) {
+    if (prog === true) {
+      window.location.href="/show-programmes";
+    } else {
+      window.location.href="/show-allprogrammes";
     }
   }
 
 
   render() {
     const modules = this.state.modules;
+    let prog = this.state.prog;
     console.log("PrintModule: " + modules);
     let moduleList;
 
@@ -84,7 +83,7 @@ class ShowModuleList extends Component {
               <Link to="/create-module" className="btn btn-outline-warning float-left">
                 + Add New Module
               </Link>
-              {this.renderProg()}
+              <button className="btn btn-outline-warning float-right" onClick={this.checkProg.bind(this,prog)}>View Programmes</button>
               <br />
               <br />
               <hr />

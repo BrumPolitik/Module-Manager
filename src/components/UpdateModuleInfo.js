@@ -12,8 +12,7 @@ class UpdateModuleInfo extends Component {
       programme_id:'',
       module_id:'',
       module_leader:'',
-      description:'',
-      published_date:''
+      description:''
     };
   }
 
@@ -26,8 +25,7 @@ class UpdateModuleInfo extends Component {
           programme_id: res.data[0].programme_id,
           module_id: res.data[0].module_id,
           module_leader: res.data[0].module_leader,
-          description: res.data[0].description,
-          published_date: res.data[0].published_date
+          description: res.data[0].description
         })
       })
       .catch(err => {
@@ -47,8 +45,7 @@ class UpdateModuleInfo extends Component {
       programme_id: this.state.programme_id,
       module_id: this.state.module_id,
       module_leader: this.state.module_leader,
-      description: this.state.description,
-      published_date: this.state.published_date
+      description: this.state.description
     };
 
     axios
@@ -142,18 +139,6 @@ class UpdateModuleInfo extends Component {
                 className='form-control'
                 rows = {3}
                 value={this.state.description}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className='form-group'>
-            <label htmlFor="published_date">Published Date</label>
-              <input
-                type='date'
-                placeholder='published_date'
-                name='published_date'
-                className='form-control'
-                value={this.state.published_date}
                 onChange={this.onChange}
               />
             </div>

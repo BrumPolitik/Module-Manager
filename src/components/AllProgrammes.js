@@ -3,12 +3,12 @@ import '../App.css';
 import axios from 'axios';
 import {backendPath} from "../path";
 import { Link } from 'react-router-dom';
-import ProgrammeCard from './ProgrammeCard';
+import Programme2Card from './Programme2Card';
 import Cookies from "universal-cookie";
 import {removeCookie} from "../removeCookie";
 const cookies = new Cookies();
 
-class ShowProgrammes extends Component {
+class AllProgrammes extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,16 +17,11 @@ class ShowProgrammes extends Component {
     }
 
     async componentDidMount() {
-        let userid = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"));
         axios
-            .get(backendPath + '/api/programmes/' + userid.data[0].user_id)
+            .get(backendPath + '/api/programmes')
             .then(async res => {
                 this.setState({
                     programmes: res.data
-                })
-                let response = await axios.get(backendPath + '/api/goals')
-                this.setState({
-                    goalsArray: response.data
                 })
             })
             .catch(err =>{
@@ -37,14 +32,13 @@ class ShowProgrammes extends Component {
 
     render() {
         const programmes = this.state.programmes;
-        const goals = this.state.goalsArray;
 
         let programmeList;
         if(!programmes) {
             programmeList = "there is no module record!";
         } else {
             programmeList = programmes.map((programme, k) =>
-                <ProgrammeCard programme={programme} goals={goals} key={k} />
+                <Programme2Card programme={programme} key={k} />
             );
         }
 
@@ -58,8 +52,8 @@ class ShowProgrammes extends Component {
                         </div>
 
                         <div className="col-md-11">
-                            <Link to="/create-programme" className="btn btn-outline-warning float-left">
-                                + Add New Programme
+                            <Link to="/show-module-list" className="btn btn-outline-warning float-left">
+                                Return to Modules
                             </Link>
                             <br />
                             <br />
@@ -79,4 +73,4 @@ class ShowProgrammes extends Component {
     }
 }
 
-export default ShowProgrammes;
+export default AllProgrammes;

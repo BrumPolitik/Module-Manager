@@ -63,7 +63,7 @@ class CreateObjective extends Component {
                         <div className="col-md-8 m-auto">
                             <br />
                             <Link to={idMap} className="btn btn-outline-warning float-left">
-                                Objectives
+                                Goals
                             </Link>
                         </div>
                         <div className="col-md-8 m-auto">

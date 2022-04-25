@@ -11,7 +11,6 @@ class UpdateModuleInfo extends Component {
       title: '',
       programme_id:'',
       module_id:'',
-      module_leader:'',
       description:''
     };
   }
@@ -24,7 +23,6 @@ class UpdateModuleInfo extends Component {
           title: res.data[0].title,
           programme_id: res.data[0].programme_id,
           module_id: res.data[0].module_id,
-          module_leader: res.data[0].module_leader,
           description: res.data[0].description
         })
       })
@@ -44,7 +42,6 @@ class UpdateModuleInfo extends Component {
       title: this.state.title,
       programme_id: this.state.programme_id,
       module_id: this.state.module_id,
-      module_leader: this.state.module_leader,
       description: this.state.description
     };
 
@@ -114,18 +111,6 @@ class UpdateModuleInfo extends Component {
                 name='module_id'
                 className='form-control'
                 value={this.state.module_id}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className='form-group'>
-            <label htmlFor="module_leader">Module Leader</label>
-              <input
-                type='text'
-                placeholder='Module Leader'
-                name='module_leader'
-                className='form-control'
-                value={this.state.module_leader}
                 onChange={this.onChange}
               />
             </div>

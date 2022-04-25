@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import {Link} from "react-router-dom";
 import axios from 'axios';
 import {backendPath} from "../path";
 
@@ -80,6 +81,7 @@ class Register extends Component {
                       className="btn btn-outline-warning btn-block mt-4"
                   />
                 </form>
+                <Link to="/" className="btn btn-outline-warning btn-block mt-4">Return to Login</Link>
               </div>
             </div>
           </div>

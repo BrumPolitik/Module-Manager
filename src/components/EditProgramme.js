@@ -10,7 +10,6 @@ class EditProgramme extends Component {
         this.state = {
             title: '',
             programme_id:'',
-            programme_leader:'',
             description:''
         };
     }
@@ -22,7 +21,6 @@ class EditProgramme extends Component {
                 this.setState({
                     title: res.data[0].title,
                     programme_id: res.data[0].programme_id,
-                    programme_leader: res.data[0].programme_leader,
                     description: res.data[0].description
                 })
             })
@@ -41,7 +39,6 @@ class EditProgramme extends Component {
         const data = {
             title: this.state.title,
             programme_id: this.state.programme_id,
-            programme_leader: this.state.programme_leader,
             description: this.state.description
         };
 
@@ -99,18 +96,6 @@ class EditProgramme extends Component {
                                     name='programme_id'
                                     className='form-control'
                                     value={this.state.programme_id}
-                                    onChange={this.onChange}
-                                />
-                            </div>
-
-                            <div className='form-group'>
-                                <label htmlFor="module_leader">Module Leader</label>
-                                <input
-                                    type='text'
-                                    placeholder='Programme Leader'
-                                    name='programme_leader'
-                                    className='form-control'
-                                    value={this.state.programme_leader}
                                     onChange={this.onChange}
                                 />
                             </div>

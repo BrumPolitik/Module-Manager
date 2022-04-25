@@ -38,6 +38,8 @@ const ProgrammeCard = (props) => {
     }
 
     function onCreateClick () {
+        removeCookie("PROG")
+        cookies.set("PROG", programme.programme_id, {path: "/"})
         window.location.href=`/create-goal/${programme._id}`
     }
 

@@ -31,11 +31,10 @@ class CreateGoal extends Component {
                 collectionLength = res.data.length;
             })
 
-        let obj = window.location.pathname.split('/')[2];
         const data = {
             goal_id: collectionLength,
             goal_name: this.state.goal_name,
-            programme_id: obj
+            programme_id: cookies.get("PROG")
         };
 
         axios

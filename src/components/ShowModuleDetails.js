@@ -33,6 +33,13 @@ class showModuleDetails extends Component {
     axios
       .delete(backendPath + '/api/modules/'+id)
       .then(res => {
+        axios
+            .get(backendPath + "/api/objectives/" + id)
+            .then(res => {
+              for (const objective of res.data) {
+                axios.delete(backendPath + "/api/objectives/" + objective._id)
+              }
+            }).catch(err => {})
         this.props.history.push("/show-module-list");
       })
       .catch(err => {

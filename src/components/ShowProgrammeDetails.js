@@ -33,6 +33,28 @@ class showProgrammeDetails extends Component {
         axios
             .delete(backendPath + '/api/programmes/'+ id)
             .then(res => {
+                axios
+                    .get(backendPath + "/api/goals/" + this.state.programme.programme_id)
+                    .then(res => {
+                        for (const goal of res.data) {
+                            axios.delete(backendPath + "/api/goals/" + goal._id)
+                        }
+                    }).catch(err => {})
+                axios
+                    .get(backendPath + "/api/modules/" + this.state.programme.programme_id)
+                    .then(res => {
+                        console.log(res);
+                        for (const module of res.data) {
+                            axios
+                                .get(backendPath + "/api/objectives/" + module._id)
+                                .then(res => {
+                                    for (const objective of res.data) {
+                                        axios.delete(backendPath + "/api/objectives/" + objective._id)
+                                    }
+                                }).catch(err => {})
+                            axios.delete(backendPath + "/api/modules/" + module._id)
+                        }
+                    }).catch(err => {})
                 this.props.history.push("/show-programmes");
             })
             .catch(err => {

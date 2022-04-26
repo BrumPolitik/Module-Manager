@@ -21,6 +21,8 @@ class ShowModuleList extends Component {
   async componentDidMount() {
     let userid = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"));
     if (userid.data[0].user_type === "prog") {
+      this.state.prog = true;
+      console.log(this.state.prog);
       let progid = await axios.get(backendPath + '/api/programmes/' + cookies.get("PROG"));
       axios
           .get(backendPath + '/api/modules/' + progid.data[0].programme_id)
@@ -32,7 +34,6 @@ class ShowModuleList extends Component {
           .catch(err => {
             console.log('Error from ShowModuleList');
           })
-      this.state.prog = true;
     } else {
       axios
           .get(backendPath + '/api/modules/' + userid.data[0].user_id)
@@ -48,7 +49,7 @@ class ShowModuleList extends Component {
   };
 
   checkProg(prog) {
-    if (prog === true) {
+    if (this.state.prog === true) {
       window.location.href="/show-programmes";
     } else {
       window.location.href="/show-allprogrammes";

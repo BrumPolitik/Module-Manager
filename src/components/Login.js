@@ -56,9 +56,11 @@ class Login extends Component {
             }
           })
           .catch(err => {
+              alert("Incorrect Login")
             console.log("Error from Login");
           });
     }).catch(function(error) {
+        alert("Incorrect Login")
       console.log('Error on Authentication');
     });
   };

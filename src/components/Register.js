@@ -40,6 +40,7 @@ class Register extends Component {
         this.props.history.push('/');
       })
       .catch(err => {
+        alert("Invalid Username")
         console.log("Error in Register!");
       })
   };

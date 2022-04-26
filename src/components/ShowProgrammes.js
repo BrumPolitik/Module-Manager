@@ -18,6 +18,9 @@ class ShowProgrammes extends Component {
 
     async componentDidMount() {
         let userid = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"));
+        this.setState({
+            user_id: userid.data[0].user_id
+        })
         axios
             .get(backendPath + '/api/programmes/' + userid.data[0].user_id)
             .then(async res => {
@@ -34,10 +37,16 @@ class ShowProgrammes extends Component {
             })
     };
 
+    onModuleClick(id) {
+        removeCookie("PROG");
+        cookies.set("PROG", id, {path: "/"});
+        window.location.href = `/show-module-list`;
+    }
 
     render() {
         const programmes = this.state.programmes;
         const goals = this.state.goalsArray;
+        const user = this.state.user_id;
 
         let programmeList;
         if(!programmes) {
@@ -61,6 +70,7 @@ class ShowProgrammes extends Component {
                             <Link to="/create-programme" className="btn btn-outline-warning float-left">
                                 + Add New Programme
                             </Link>
+                            <button type="button" className="btn btn-outline-warning float-right" onClick={this.onModuleClick.bind(this,user)}>View Personal Modules</button>
                             <br />
                             <br />
                             <hr />

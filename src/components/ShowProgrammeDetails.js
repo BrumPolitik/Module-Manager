@@ -62,7 +62,7 @@ class showProgrammeDetails extends Component {
             })
     };
 
-    onModuleClick (id) {
+    onModuleClick(id) {
         removeCookie("PROG");
         cookies.set("PROG", id, {path: "/"});
         window.location.href = `/show-module-list`;
@@ -145,7 +145,7 @@ class showProgrammeDetails extends Component {
                     <div className="row">
 
                         <div className="col-md-12">
-                            <button type="button" className="btn btn-outline-info btn-lg btn-block" onClick={this.onModuleClick.bind(this,programme._id)}>View Modules</button>
+                            <button type="button" className="btn btn-outline-info btn-lg btn-block" onClick={this.onModuleClick.bind(this,programme.programme_id)}>View Modules</button>
                             <br />
                         </div>
 

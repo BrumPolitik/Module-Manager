@@ -22,10 +22,9 @@ class ShowModuleList extends Component {
     let userid = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"));
     if (userid.data[0].user_type === "prog") {
       this.state.prog = true;
-      console.log(this.state.prog);
-      let progid = await axios.get(backendPath + '/api/programmes/' + cookies.get("PROG"));
+      //let prog = axios.get(backendPath + '/api/crypt/decrypt', cookies.get("PROG"))
       axios
-          .get(backendPath + '/api/modules/' + progid.data[0].programme_id)
+          .get(backendPath + '/api/modules/' + cookies.get("PROG"))
           .then(res => {
             this.setState({
               modules: res.data

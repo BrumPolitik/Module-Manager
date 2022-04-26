@@ -16,6 +16,12 @@ class UpdateModuleInfo extends Component {
   }
 
   componentDidMount() {
+    axios.get(backendPath + '/api/programmes')
+        .then(res => {
+          this.setState({
+            programmes: res.data
+          });
+        });
     axios
       .get(backendPath + '/api/modules/'+this.props.match.params.id)
       .then(res => {
@@ -57,6 +63,13 @@ class UpdateModuleInfo extends Component {
 
 
   render() {
+    const programmes = this.state.programmes
+    let programmeList;
+    if (programmes) {
+      programmeList = programmes.map((e, key) => {
+        return <option key={key} value={e.programme_id} >{e.programme_id}</option>;
+      })
+    }
 
     return (
       <div className="UpdateModuleInfo">
@@ -92,15 +105,10 @@ class UpdateModuleInfo extends Component {
             <br />
 
             <div className='form-group'>
-            <label htmlFor="programme_id">Programme ID</label>
-              <input
-                type='text'
-                placeholder='Programme ID'
-                name='programme_id'
-                className='form-control'
-                value={this.state.programme_id}
-                onChange={this.onChange}
-              />
+              <select className="custom-select" id="progSelect" onChange={this.onDropClick}>
+                <option selected>{this.state.programme_id}</option>
+                {programmeList}
+              </select>
             </div>
 
             <div className='form-group'>
@@ -118,7 +126,6 @@ class UpdateModuleInfo extends Component {
             <div className='form-group'>
             <label htmlFor="description">Description</label>
               <textarea
-                type='text'
                 placeholder='Describe the module'
                 name='description'
                 className='form-control'

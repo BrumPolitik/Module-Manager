@@ -53,7 +53,7 @@ class CreateGoal extends Component {
     };
 
     render() {
-        const idMap = `/show-programme/${cookies.get("PROG")}`;
+        const idMap = `/show-programmes/${cookies.get("TOKEN")}`;
 
         return (
             <div className="CreateModule">

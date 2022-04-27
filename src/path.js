@@ -1,1 +1,1 @@
-export const backendPath = "http://localhost:8082"//"https://warm-river-64091.herokuapp.com"
+export const backendPath = "https://warm-river-64091.herokuapp.com"

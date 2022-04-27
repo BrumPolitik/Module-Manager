@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 import {backendPath} from "../path";
-import ObjectiveCard from "./ObjectiveCard";
+import Objective2Card from "./Objective2Card";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -16,8 +16,9 @@ class ShowObjectives extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.match.params.id);
         axios
-            .get(backendPath + '/api/objectives/' + cookies.get("MODULE")+':' + cookies.get("GOAL"))
+            .get(backendPath + '/api/objectives/' + this.props.match.params.id)
             .then(res => {
                 this.setState({
                     objectives: res.data
@@ -32,15 +33,15 @@ class ShowObjectives extends Component {
     render() {
         const modId = cookies.get("MODULE")
         const objectives = this.state.objectives;
-        console.log("Printobjective: " + objectives);
         let objectiveList;
 
         if(!objectives) {
             objectiveList = "there is no objective record!";
         } else {
             objectiveList = objectives.map((objective, k) =>
-                <ObjectiveCard objective={objective} key={k} />
+                <Objective2Card objective={objective} key={k} />
             );
+            console.log("here");
         }
 
         return (
@@ -49,12 +50,12 @@ class ShowObjectives extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <br />
-                            <h2 className="display-4 text-center">Programme objectives List</h2>
+                            <h2 className="display-4 text-center">Objectives List</h2>
                         </div>
 
                         <div className="col-md-11">
-                            <Link to={`/map-module/${modId}`} className="btn btn-outline-warning float-right">
-                                Module Mapping
+                            <Link to={`/show-programmes`} className="btn btn-outline-warning float-right">
+                                Programmes
                             </Link>
                             <br />
                             <br />

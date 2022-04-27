@@ -28,7 +28,9 @@ const Goal2Card = (props) => {
     return(
         <div className="float-left">
             <div className="obj-container">
-                <h2>{goal.goal_name}</h2>
+                <h2>
+                    <Link to={`/show-objectives/${goal._id}`}>{goal.goal_name}</Link>
+                </h2>
                 <div>
                     <div className="padded">
                         <button className="btn margin-right" onClick={onEditClick.bind(goal._id)}><i className="fa fa-pencil-alt"></i></button>

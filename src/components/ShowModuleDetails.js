@@ -137,7 +137,7 @@ class showModuleDetails extends Component {
           <div className="row">
 
             <div className="col-md-12">
-              <button type="button" className="btn btn-outline-info btn-lg btn-block" onClick={this.onMapClick.bind(this,module._id)}>Map Module</button><br />
+              <button type="button" className="btn btn-outline-info btn-lg btn-block" onClick={this.onMapClick.bind(this,module._id)}>View Module Objectives</button><br />
             </div>
 
           </div>

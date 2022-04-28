@@ -107,7 +107,7 @@ class CreateModule extends Component {
 
                   <div className='form-group'>
                     <select className="custom-select" id="progSelect" onChange={this.onDropClick}>
-                      <option selected disabled hidden>Choose...</option>
+                      <option selected disabled hidden>Choose Programme Id...</option>
                       {programmeList}
                     </select>
                   </div>

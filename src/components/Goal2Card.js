@@ -14,6 +14,13 @@ const Goal2Card = (props) => {
         axios
             .delete(backendPath + '/api/goals/' + goal._id)
             .then(res => {
+                axios
+                    .get(backendPath + "/api/objectives/" + goal._id)
+                    .then(res => {
+                        for (const objective of res.data) {
+                            axios.delete(backendPath + "/api/objectives/" + objective._id)
+                        }
+                    }).catch(err => {})
                 window.location.reload();
             })
             .catch(err => {

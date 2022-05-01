@@ -5,6 +5,7 @@ import {backendPath} from "../path";
 import { Link } from 'react-router-dom';
 import ModuleCard from './ModuleCard';
 import Cookies from "universal-cookie";
+import {removeCookie} from "../removeCookie";
 const cookies = new Cookies();
 
 
@@ -55,6 +56,14 @@ class ShowModuleList extends Component {
     }
   }
 
+  logout(id) {
+    removeCookie("TOKEN");
+    removeCookie("MODULE");
+    removeCookie("PROG");
+    removeCookie("GOAL");
+    window.location.href = `/`;
+  }
+
 
   render() {
     const modules = this.state.modules;
@@ -87,6 +96,11 @@ class ShowModuleList extends Component {
                   <button className="btn btn-outline-warning float-right" onClick={this.checkProg.bind(this, prog)}>View
                     Programmes
                   </button>
+                  <div className="row justify-content-center">
+                  <button className="btn btn-outline-warning float-none" onClick={this.logout.bind(this, prog)}>
+                    Logout
+                  </button>
+                  </div>
                   <br/>
                   <br/>
                   <hr/>

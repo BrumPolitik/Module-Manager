@@ -43,6 +43,14 @@ class ShowProgrammes extends Component {
         window.location.href = `/show-module-list`;
     }
 
+    logout(id) {
+        removeCookie("TOKEN");
+        removeCookie("MODULE");
+        removeCookie("PROG");
+        removeCookie("GOAL");
+        window.location.href = `/`;
+    }
+
     render() {
         const programmes = this.state.programmes;
         const goals = this.state.goalsArray;
@@ -72,6 +80,11 @@ class ShowProgrammes extends Component {
                                 + Add New Programme
                             </Link>
                             <button type="button" className="btn btn-outline-warning float-right" onClick={this.onModuleClick.bind(this,user)}>View Personal Modules</button>
+                            <div className="row justify-content-center">
+                            <button className="btn btn-outline-warning float-none" onClick={this.logout.bind(this, user)}>
+                                Logout
+                            </button>
+                            </div>
                             <br />
                             <br />
                             <hr />

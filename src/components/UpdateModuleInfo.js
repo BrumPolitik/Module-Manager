@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {backendPath} from "../path";
 import '../App.css';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 class UpdateModuleInfo extends Component {
   constructor(props) {
@@ -71,6 +73,12 @@ class UpdateModuleInfo extends Component {
       })
     }
 
+    axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
+      headers: {
+        withCredentials: true,
+        authorization: 'Basic ' + cookies.get("CON")
+      }
+    }).then(function(response) {
     return (
       <div className="UpdateModuleInfo">
         <div className="container">
@@ -142,6 +150,8 @@ class UpdateModuleInfo extends Component {
         </div>
       </div>
     );
+    })
+    return (<h3>User Not Authenticated</h3>);
   }
 }
 

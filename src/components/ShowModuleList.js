@@ -70,6 +70,12 @@ class ShowModuleList extends Component {
       );
     }
 
+    axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
+      headers: {
+        withCredentials: true,
+        authorization: 'Basic ' + cookies.get("CON")
+      }
+    }).then(function(response) {
     return (
       <div className="ShowModuleList">
         <div className="container">
@@ -98,6 +104,8 @@ class ShowModuleList extends Component {
         </div>
       </div>
     );
+    })
+    return (<h3>User Not Authenticated</h3>);
   }
 }
 

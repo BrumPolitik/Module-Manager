@@ -45,6 +45,12 @@ class SelectGoal extends Component {
             );
         }
 
+        axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
+            headers: {
+                withCredentials: true,
+                authorization: 'Basic ' + cookies.get("CON")
+            }
+        }).then(function(response) {
         return (
             <div className="SelectGoal">
                 <div className="container">
@@ -73,6 +79,8 @@ class SelectGoal extends Component {
                 </div>
             </div>
         );
+        })
+        return (<h3>User Not Authenticated</h3>);
     }
 }
 export default SelectGoal;

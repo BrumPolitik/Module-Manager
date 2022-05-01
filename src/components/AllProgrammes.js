@@ -24,7 +24,7 @@ class AllProgrammes extends Component {
                     programmes: res.data
                 })
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log('Error from ShowProgrammes');
             })
     };
@@ -34,43 +34,52 @@ class AllProgrammes extends Component {
         const programmes = this.state.programmes;
 
         let programmeList;
-        if(!programmes) {
+        if (!programmes) {
             programmeList = "there is no module record!";
         } else {
             programmeList = programmes.map((programme, k) =>
-                <Programme2Card programme={programme} key={k} />
+                <Programme2Card programme={programme} key={k}/>
             );
         }
 
-        return (
-            <div className="ShowModuleList">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <br />
-                            <h2 className="display-4 text-center">Programmes List</h2>
+        axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"), {
+            headers: {
+                withCredentials: true,
+                authorization: 'Basic ' + cookies.get("CON")
+            }
+        }).then(function (response) {
+            return (
+                <div className="ShowModuleList">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <br/>
+                                <h2 className="display-4 text-center">Programmes List</h2>
+                            </div>
+
+                            <div className="col-md-11">
+                                <Link to="/show-module-list" className="btn btn-outline-warning float-left">
+                                    Return to Modules
+                                </Link>
+                                <br/>
+                                <br/>
+                                <hr/>
+                            </div>
+
+                            <div id="app"></div>
+
                         </div>
 
-                        <div className="col-md-11">
-                            <Link to="/show-module-list" className="btn btn-outline-warning float-left">
-                                Return to Modules
-                            </Link>
-                            <br />
-                            <br />
-                            <hr />
+                        <div className="list">
+                            {programmeList}
                         </div>
-
-                        <div id="app"></div>
-
-                    </div>
-
-                    <div className="list">
-                        {programmeList}
                     </div>
                 </div>
-            </div>
-        );
+            );
+        })
+        return (<h3>User Not Authenticated</h3>);
     }
 }
+
 
 export default AllProgrammes;

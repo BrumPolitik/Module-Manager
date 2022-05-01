@@ -8,8 +8,8 @@ const cookies = new Cookies();
 
 
 class CreateProgramme extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             programme_id:'',
             title: '',
@@ -55,68 +55,76 @@ class CreateProgramme extends Component {
     };
 
     render() {
-        return (
-            <div className="CreateModule">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <br />
-                            <Link to="/show-programmes" className="btn btn-outline-warning float-left">
-                                Show Programme List
-                            </Link>
-                        </div>
-                        <div className="col-md-8 m-auto">
-                            <h1 className="display-4 text-center">Add Programme</h1>
-                            <p className="lead text-center">
-                                Create new programme
-                            </p>
+        axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
+            headers: {
+                withCredentials: true,
+                authorization: 'Basic ' + cookies.get("CON")
+            }
+        }).then(function(response) {
+            return (
+                <div className="CreateModule">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-8 m-auto">
+                                <br/>
+                                <Link to="/show-programmes" className="btn btn-outline-warning float-left">
+                                    Show Programme List
+                                </Link>
+                            </div>
+                            <div className="col-md-8 m-auto">
+                                <h1 className="display-4 text-center">Add Programme</h1>
+                                <p className="lead text-center">
+                                    Create new programme
+                                </p>
 
-                            <form noValidate onSubmit={this.onSubmit}>
-                                <div className='form-group'>
-                                    <input
-                                        type='text'
-                                        placeholder='Title of the Programme'
-                                        name='title'
-                                        className='form-control'
-                                        value={this.state.title}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-                                <br />
+                                <form noValidate onSubmit={this.onSubmit}>
+                                    <div className='form-group'>
+                                        <input
+                                            type='text'
+                                            placeholder='Title of the Programme'
+                                            name='title'
+                                            className='form-control'
+                                            value={this.state.title}
+                                            onChange={this.onChange}
+                                        />
+                                    </div>
+                                    <br/>
 
-                                <div className='form-group'>
-                                    <input
-                                        type='text'
-                                        placeholder='Programme ID'
-                                        name='programme_id'
-                                        className='form-control'
-                                        value={this.state.programme_id}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
+                                    <div className='form-group'>
+                                        <input
+                                            type='text'
+                                            placeholder='Programme ID'
+                                            name='programme_id'
+                                            className='form-control'
+                                            value={this.state.programme_id}
+                                            onChange={this.onChange}
+                                        />
+                                    </div>
 
-                                <div className='form-group'>
+                                    <div className='form-group'>
                                     <textarea
                                         type='text'
                                         placeholder='Describe the programme'
                                         name='description'
                                         className='form-control'
-                                        rows = {3}
+                                        rows={3}
                                         value={this.state.description}
                                         onChange={this.onChange}
                                     />
-                                </div>
+                                    </div>
 
-                                <input
-                                    type="submit"
-                                    className="btn btn-outline-warning btn-block mt-4"
-                                />
-                            </form>
+                                    <input
+                                        type="submit"
+                                        className="btn btn-outline-warning btn-block mt-4"
+                                    />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        })
+        return(<h3>User Not Authenticated</h3>);
     }
 }
 

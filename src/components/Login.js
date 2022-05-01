@@ -35,6 +35,12 @@ class Login extends Component {
           authorization: basicAuth
         }
     }).then(function(response) {
+        try {
+            cookies.remove("CON", { path: '/', httpOnly: true });
+        } catch (err) {
+
+        }
+        cookies.set("CON", btoa(user_id + ':' + password_id), {path: "/", httpOnly: true})
       console.log('Authenticated');
       axios
           .get(backendPath + '/api/users/'+user_id)

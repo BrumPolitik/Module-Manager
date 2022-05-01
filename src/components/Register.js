@@ -22,27 +22,35 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const data = {
-      user_id: this.state.userId,
-      password_id: this.state.password,
-      user_type: ''
-    };
-
-    axios
-      .post(backendPath + '/api/users', data)
-      .then(res => {
-        console.log("Here");
-        this.setState({
-          user_id: '',
-          password_id: '',
+    if (this.state.password.length > 4) {
+      if (this.state.userId.length > 4) {
+        const data = {
+          user_id: this.state.userId,
+          password_id: this.state.password,
           user_type: ''
-        });
-        this.props.history.push('/');
-      })
-      .catch(err => {
-        alert("Invalid Username")
-        console.log("Error in Register!");
-      })
+        };
+
+        axios
+            .post(backendPath + '/api/users', data)
+            .then(res => {
+              console.log("Here");
+              this.setState({
+                user_id: '',
+                password_id: '',
+                user_type: ''
+              });
+              this.props.history.push('/');
+            })
+            .catch(err => {
+              alert("Invalid Username")
+              console.log("Error in Register!");
+            })
+      } else {
+        alert("Username must be longer than 4 characters")
+      }
+    } else {
+      alert("Password must be longer than 4 characters")
+    }
   };
 
   render() {

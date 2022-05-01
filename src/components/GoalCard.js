@@ -53,11 +53,7 @@ const GoalCard = (props) => {
     return (
         <div className="card-container">
             <div className="desc">
-                <h2>
-                    <Link to={`/show-objectives/${goal._id}`} onClick={onGoalClick.bind(goal._id)}>
-                        {goal.goal_name}
-                    </Link>
-                </h2>
+                {goal.goal_name}
                 <p>{goal.programme_id}</p>
                 <div>
                     {objList}

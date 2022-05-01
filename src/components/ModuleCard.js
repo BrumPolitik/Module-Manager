@@ -44,7 +44,7 @@ const ModuleCard = (props) => {
                         { module.title }
                     </Link>
                 </h2>
-                <h3>{module.module_leader}</h3>
+                <h3>{module.module_id}</h3>
                 <h3>{module.module_leader}</h3>
                 <p>{module.description}</p>
                 <div>

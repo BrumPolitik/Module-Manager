@@ -44,12 +44,7 @@ class ShowObjectives extends Component {
             console.log("here");
         }
 
-        axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
-            headers: {
-                withCredentials: true,
-                authorization: 'Basic ' + cookies.get("CON")
-            }
-        }).then(function(response) {
+        if (cookies.get("TOKEN")) {
         return (
             <div className="ShowModuleList">
                 <div className="container">
@@ -78,8 +73,9 @@ class ShowObjectives extends Component {
                 </div>
             </div>
         );
-        })
-        return (<h3>User Not Authenticated</h3>);
+        } else {
+            return (<h3>User Not Authenticated</h3>);
+        }
     }
 }
 export default ShowObjectives;

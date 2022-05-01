@@ -55,12 +55,7 @@ class CreateGoal extends Component {
     render() {
         const idMap = `/show-programmes/${cookies.get("TOKEN")}`;
 
-        axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
-            headers: {
-                withCredentials: true,
-                authorization: 'Basic ' + cookies.get("CON")
-            }
-        }).then(function(response) {
+        if (cookies.get("TOKEN")) {
         return (
             <div className="CreateModule">
                 <div className="container">
@@ -101,8 +96,9 @@ class CreateGoal extends Component {
                 </div>
             </div>
         );
-        })
-        return (<h3>User Not Authenticated</h3>);
+        } else {
+            return (<h3>User Not Authenticated</h3>);
+        }
     }
 }
 

@@ -70,42 +70,40 @@ class ShowModuleList extends Component {
       );
     }
 
-    axios.get(backendPath + '/api/users/'+cookies.get("TOKEN"),  {
-      headers: {
-        withCredentials: true,
-        authorization: 'Basic ' + cookies.get("CON")
-      }
-    }).then(function(response) {
-    return (
-      <div className="ShowModuleList">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <br />
-              <h2 className="display-4 text-center">Modules List</h2>
-            </div>
+    if (cookies.get("TOKEN")) {
+      return (
+          <div className="ShowModuleList">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <br/>
+                  <h2 className="display-4 text-center">Modules List</h2>
+                </div>
 
-            <div className="col-md-11">
-              <Link to="/create-module" className="btn btn-outline-warning float-left">
-                + Add New Module
-              </Link>
-              <button className="btn btn-outline-warning float-right" onClick={this.checkProg.bind(this,prog)}>View Programmes</button>
-              <br />
-              <br />
-              <hr />
-            </div>
+                <div className="col-md-11">
+                  <Link to="/create-module" className="btn btn-outline-warning float-left">
+                    + Add New Module
+                  </Link>
+                  <button className="btn btn-outline-warning float-right" onClick={this.checkProg.bind(this, prog)}>View
+                    Programmes
+                  </button>
+                  <br/>
+                  <br/>
+                  <hr/>
+                </div>
 
 
-          </div>
+              </div>
 
-          <div className="list">
+              <div className="list">
                 {moduleList}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    );
-    })
-    return (<h3>User Not Authenticated</h3>);
+      );
+    } else {
+      return (<h3>User Not Authenticated</h3>);
+    }
   }
 }
 

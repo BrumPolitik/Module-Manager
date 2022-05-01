@@ -28,30 +28,35 @@ class CreateProgramme extends Component {
 
         let user = await axios.get(backendPath + '/api/users/' + cookies.get("TOKEN"))
 
-        const data = {
-            title: this.state.title,
-            programme_id: this.state.programme_id,
-            programme_leader: user.data[0].user_id,
-            description: this.state.description,
-            published_date: new Date()
-        };
+        if (user.data[0].prog === true) {
 
-        axios
-            .post(backendPath + '/api/programmes', data)
-            .then(res => {
-                this.setState({
-                    title: '',
-                    programme_id: '',
-                    programme_leader: '',
-                    description: '',
-                    published_date: ''
+            const data = {
+                title: this.state.title,
+                programme_id: this.state.programme_id,
+                programme_leader: user.data[0].user_id,
+                description: this.state.description,
+                published_date: new Date()
+            };
+
+            axios
+                .post(backendPath + '/api/programmes', data)
+                .then(res => {
+                    this.setState({
+                        title: '',
+                        programme_id: '',
+                        programme_leader: '',
+                        description: '',
+                        published_date: ''
+                    })
+                    this.props.history.push('/show-programmes');
                 })
-                this.props.history.push('/show-programmes');
-            })
-            .catch(err => {
-                console.log(err);
-                console.log("Error in CreateProgramme!");
-            })
+                .catch(err => {
+                    console.log(err);
+                    console.log("Error in CreateProgramme!");
+                })
+        } else {
+            alert("Invalid User");
+        }
     };
 
     render() {
